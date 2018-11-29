@@ -1,0 +1,6 @@
+# This is a comment
+# target: prereqs
+# recipe
+
+all:
+	gcc ben_example.c ben_helpers.c -o ben_example

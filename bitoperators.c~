@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+int main(){
+  // unsigned does not use sign bit
+  unsigned int x = 0x0b;
+  unsigned int y = 0x0a;
+  printf("%d in hex is 0x%x\n", x, x);
+  printf("0x%X XOR 0x%X = 0x%X\n", x, y, x ^ y);
+  return 0;
+}

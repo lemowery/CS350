@@ -1,0 +1,8 @@
+#include <stdio.h>
+#include "vector.h"
+
+int main (){
+  Vector* vector = CreateVector(8);
+  
+  return 0;
+}

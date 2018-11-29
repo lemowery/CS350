@@ -1,0 +1,86 @@
+// Levi Mowery
+// 800096308
+// lemowery@mix.wvu.edu
+
+#include "thread_utils.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <string.h>
+
+void* BuildDictionaryFromFiles(void* jobargs){
+  // Builds dictionary from files
+  if (jobargs == NULL){
+    return NULL;
+  }
+  JobArguments* job_args = (JobArguments*) jobargs;
+  char* string = (char*) malloc(512 * sizeof(char));
+  char line[512];
+  for (int i = job_args->start_index; i < job_args->end_index; ++i){
+    FILE* file = fopen(job_args->filepaths[i], "r");
+    if (file == NULL){
+      return NULL;
+    }
+    while (fgets(line, 512, file)){
+      string = strtok(line, " ");
+      Put(string, job_args->hash_table);
+      while (string != NULL){
+	string =  strtok(NULL, " ");
+	Put(string, job_args->hash_table);
+      }
+    }
+    fclose(file);
+  }
+  free(string);
+  string = NULL;
+  pthread_exit(job_args);
+}
+
+void CreateOutputFile(HashTable* table, char* output_path){
+  // Creates output file from hash table
+  // Creates file at give filepath
+  if (table == NULL || output_path == NULL){
+    return;
+  }
+  FILE* file  = fopen(output_path, "w");
+  if (file == NULL){
+    return;
+  }
+  for (int i = 0; i < 26; ++i){
+    LinkedList* list = GetList(table->keys[i], table);
+    StringNode* current = list->front;
+    while (current != NULL){
+      fprintf(file, "%s ", current->string);
+      current = current->next;
+    }
+    fprintf(file, "\n");
+  }
+  fclose(file);
+}
+
+HashTable* ProcessFiles(int num_of_threads, const char** strings, int num_of_files){
+  // Assigns appropriate threads to read files
+  if (strings == NULL || num_of_threads >= num_of_files){
+    return NULL;
+  }
+  HashTable* table = CreateHashTable();
+  JobArguments arguments[num_of_threads];
+  pthread_t workers[num_of_threads];
+  pthread_attr_t attributes;
+  if (pthread_attr_init(&attributes)){
+      return NULL;
+  }
+  pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_JOINABLE);
+  int files_per_thread = num_of_files / num_of_threads;
+  for (int i = 0; i < num_of_threads; ++i){
+    arguments[i].hash_table = table;
+    arguments[i].filepaths = strings;
+    arguments[i].start_index = i * files_per_thread;
+    arguments[i].end_index = arguments[i].start_index + files_per_thread;
+    pthread_create(&workers[i], &attributes, BuildDictionaryFromFiles, &arguments[i]);
+  }
+  for (int i = 0; i < num_of_threads; ++i){
+    pthread_join(workers[i], NULL);
+  }
+  return table;
+}

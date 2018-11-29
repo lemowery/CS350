@@ -1,0 +1,16 @@
+#include <stdio.h>
+//factorial funciton in header below
+#include "math_fm.h"
+
+int main(){
+  //correctness
+  //base case
+  int input = 0;
+  int result = CalculateFactorial(input);
+  if(result != 1){
+    printf("ERROR in base case");
+  }
+  input = 1;
+  result = CalculateFactorial(input);
+  return 0;
+}

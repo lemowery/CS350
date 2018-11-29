@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int main(){
+  // malloc
+  char* string;
+  // Space for 50 chars = 50 bytes, 1 char = 1 byte
+  // This memory allocation in the *heap*
+  // malloc returns a void* which is a generic pointer
+  string = (char*) malloc(50 * sizeof(char));
+  return 0;
+}

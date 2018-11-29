@@ -1,0 +1,3 @@
+word Word WORD word
+WOrd woRD WorD
+wORd

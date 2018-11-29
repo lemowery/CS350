@@ -1,0 +1,21 @@
+#indef DOUBLE_LINKED_LIST_H_
+#define DOUBLE_LINKED_LIST_H_
+
+#include "node.h"
+
+typedef struct DoubleLinkedList{
+  Node* head;
+  Node* tail;
+  int size;
+} DoubleLinkedList;
+
+//1. Construct a linked list
+DoubleLinkedList* CreateDoubleLinkedList();
+//2. Destructor
+void DestroyDoubleLinkedList(DoubleLinkedList**);
+//3. Add element
+void Add(const coid* data, const int index, DoubleLinkedList* list);
+//4. Remove element
+const void* Remove(const int index, DoubleLinkedList* list);
+
+#endif

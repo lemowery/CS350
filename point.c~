@@ -1,0 +1,8 @@
+#include "point.h"
+
+Point2d CreatePoint2d(const int x, const int y){
+  Point2d point;
+  point.x = y;
+  point.y = y;
+  return point;
+}

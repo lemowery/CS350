@@ -1,0 +1,89 @@
+#include "assignment_3.h"
+#include <stdio.h>
+
+int ClassifyPoint(const Point* point, const ClassifierParams* cp){
+  // Classifies a single point
+  // No NULL pointers
+  if (point == NULL || cp == NULL){
+    fprintf(stderr, "Input NULL pointer,");
+    return 0;
+  }
+  if(((*cp).bias + (*cp).wx * (*point).x + (*cp).wy * (*point).y + (*cp).wz * (*point).z
+      + (*cp).ww * (*point).w) >= 0){
+    return 1;
+  }
+  return -1;
+}
+
+void ClassifyPoints(const Point* points, const int size, const ClassifierParams* cp,
+		    int* labels){
+  // Classifies array of Points and stores classifications into an array of ints
+  // No NULL pointers
+  // Will not classify Point array of size 0
+  if (points == NULL || size == 0|| cp == NULL || labels == NULL){
+    fprintf(stderr, "Invalid input passed.");
+    return; 
+  }
+  for (int i = 0; i < size; ++i){
+    int class = ClassifyPoint(&points[i], cp);
+    *(labels + i) = class;
+  }
+}
+
+int ReadSizeOfArrayOfPoints(const char* filepath){
+  // Reads first int from binary file to obtain number of points contained in binary file
+  // Returns -1 when file cannot be opened
+  // Error if filepath is NULL
+if (filepath == NULL){
+    fprintf(stderr, "NULL filepath pointer.");
+    return -1;
+  }
+  FILE* inputfile = fopen(filepath, "rb");
+  if (inputfile == NULL){
+    fprintf(stderr, "Could not open point number file: %s", filepath);
+    return -1;
+  }
+  int size;
+  fread(&size, sizeof(int), 1, inputfile);
+  fclose(inputfile);
+  inputfile = NULL;
+  return size;
+}
+
+int ReadPoints(const char* filepath, const int numberofpoints, Point* points){
+  // Reads an array of Points from binary file and stores array in a pointer
+  // Returns TRUE if successful, FALSE if not 
+  // No NULL pointers
+  // No number of points < 1
+  if (filepath == NULL || numberofpoints < 1 || points == NULL){
+    fprintf(stderr, "Invalid ReadPoints input argument.");
+  }
+  FILE* inputfile = fopen(filepath, "rb");
+  if (inputfile == NULL){
+    fprintf(stderr, "Could not open read point file: %s", filepath);
+    return FALSE;
+  }
+  fseek(inputfile, sizeof(int), SEEK_SET);
+  fread(points, sizeof(Point), numberofpoints, inputfile);
+  fclose(inputfile);
+  inputfile = NULL;
+  return TRUE;
+}
+
+int LoadClassifierParams(const char* filepath, ClassifierParams* cp){
+  // Loads classifier parameters from binary file and stores them into a pointer
+  // Returns TRUE if successful, FALSE if not
+  // No NULL pointers
+  if (filepath == NULL|| cp == NULL){
+    fprintf(stderr, "Invalid LoadClassifierParams input argument.");
+    return FALSE;
+  }
+  FILE* inputfile = fopen(filepath, "rb");
+  if (inputfile == NULL){
+    fprintf(stderr, "Could not open parameter file: %s", filepath);
+    return FALSE;
+  }
+  fread(cp, sizeof(ClassifierParams), 1, inputfile);
+  fclose(inputfile);
+  return TRUE;
+}

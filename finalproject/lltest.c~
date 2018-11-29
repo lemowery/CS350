@@ -1,0 +1,6 @@
+#include "linked_list.c"
+#include <stdlib.h>
+
+int main(){
+  LinkedList* list = CreateLinkedList();
+}

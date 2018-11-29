@@ -1,0 +1,43 @@
+#include "vector.h"
+
+// Constructor
+// void InitializeVector(const int capacity, Vector* array);
+Vector* CreateVector(const int capacity){
+  if (capacity < 1){
+    return NULL;
+  }
+  Vector* vector = (Vector*) malloc(sizeof(Vector));
+  if (vector == NULL){
+    return NULL;
+  }
+  vector->array = (*int) malloc(capacity * sizeof(int));
+  if (vector->array == NULL){
+    free(vector);
+    vector = NULL;
+    return NULL;
+  }
+  vector->size = 0;
+  vector->capacity = capacity;
+  return vector;
+}
+
+void Add(const int value, Vector* vector){
+  if (vector == NULL){
+    return;
+  }
+  // General case
+  vector->array[size] = value;
+  vector->size++;
+}
+
+// Destructor
+void DestroyVector(Vector** vector_ptr){
+  if (vector_ptr == NULL){
+    return;
+  }
+  Vector* vector = *vector_ptr;
+  free(vector->array);
+  vector->array = NULL;
+  free(vector);
+  *vector_ptr = NULL;
+}

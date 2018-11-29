@@ -1,0 +1,67 @@
+// Test file for assignment 4
+#include "assignment_4.h"
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+//Checking constructor
+  printf("Creating queue...\n");
+  Queue* q1 = CreateQueue();
+  if (q1 == NULL){
+    printf("Could not create queue.\n");
+    return 1;
+  }
+
+  //Checking enqueue
+  printf("Checking NULL Enqueues...\n");
+  char* str1 = NULL;
+  Enqueue(str1, q1);
+  if(q1->front != NULL){
+    printf("Incorrect NULL string Enqueue...\n");
+    return 1;
+  }
+  Queue* q2 = NULL;
+  str1 = "test";
+  Enqueue(str1, q2);
+  if(q1->front != NULL){
+    printf("Incorrect NULL queue Enqueue...\n");
+    return 1;
+  }
+  printf("Checking valid Enqueue...\n");
+  char* str2 = "test2";
+  Enqueue(str1, q1);
+  if(strcmp(str1, q1->front->string) != 0){
+    printf("Invalid first enqueue...\n");
+    return 1;
+  }
+  Enqueue(str2, q1);
+  if(strcmp(str2, q1->front->next->string) != 0 && strcmp(str1, q1->front->string) != 0){
+    printf("Invalid second enqueue...\n");
+  }
+  
+  //Checking Dequeue
+  printf("Checking NULL Dequeue...\n");
+  if(Dequeue(q2) != NULL){
+    printf("Invalid NULL Dequeue...\n");
+  }
+  printf("Checking valid Dequeue...\n");
+  if(strcmp(str1, Dequeue(q1)) != 0){
+    printf("Invalid first Dequeue\n");
+  }
+  if (strcmp(str2, Dequeue(q1)) != 0){
+    printf("Invalid second Dequeue\n");
+  }
+  //Checking Destructor
+  printf("Checking DestroyQueue...\n");
+  DestroyQueue(&q1);
+  if(q1 != NULL){
+    printf("Invalid DestroyQueue...\n");
+  }
+  Queue* q1 = CreateQueue();
+  char* s1 = "hello";
+  char* s2 = "Levi";
+  char* s3 = "Millie";
+  Enqueue(s1, q1);
+  
+  return 0;
+}

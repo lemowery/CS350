@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main(){
+  int num = 5;
+  char letter = 'a';
+  char letter2 = 'n';
+  //pointer to integer
+  int* num_ptr = NULL;
+  char* letter_ptr = &letter;
+  // & gives address of num.
+  num_ptr = &num;
+  printf("Address of num: %p with value: %d\n", num_ptr, *num_ptr);
+  // *num_ptr gives value at the address
+  printf("Address of letter: %p with value: %c\n",letter_ptr, *letter_ptr);
+  letter_ptr = &letter2;//can reuse pointers
+  printf("Address of letter: %p with value: %c\n",letter_ptr, *letter_ptr);
+  return 0;
+}

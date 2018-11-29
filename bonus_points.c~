@@ -1,0 +1,85 @@
+#include "bonus_points.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+void MergeSort(int* first, int* last){
+  /*
+    Implementation of merge sort
+    Null pointers will cause an error message
+    Arrays of size 1 are already sorted
+   */
+  if (first == NULL || last == NULL){
+    fprintf(stderr, "Could  not perform merge sort.");
+  }
+  int* middle  = first + (last - first + 1) / 2;
+   if (last - first < 1){
+    return;
+  }
+   MergeSort(first, middle - 1);
+   MergeSort(middle, last);
+   Merge(first, middle, last);
+}
+
+void Merge(int* first, int* middle, int* last){
+  // Merges subarrays given by MergeSort
+  // No null pointers accepted
+
+  if (first == NULL || middle == NULL || last == NULL){
+    fprintf(stderr, "Could not perform merge sort.");
+  }
+  printf("%d %d %d\n", *first, *middle, *last);
+  int* newlist = (int*) malloc (200 * sizeof(int));
+  int* counter = newlist;
+  while (middle - first > 0 && last - middle > 0){
+    if (*first > *middle){
+      *counter++ = *middle++;
+    }
+    else{
+      *counter++ = *first++;
+    }
+  }
+  while((middle - 1) - first > 0){
+    *counter++ = *first++;
+  }
+  while(last - middle > 0){
+    *counter++ = *middle++;
+  }
+  *first = *newlist;
+  *last = *counter;
+  *middle = (last - first + 1) / 2;
+}
+
+void InsertionSort(int* first, int* last){
+
+}
+
+int BinaryStringToDecimal(char* str){
+  // Converts binary string to decimal number
+  // Error if input string is null
+  if (str == NULL){
+    fprintf(stderr, "Null pointer input.");
+    return -1;
+  }
+  int binarynum = 0;
+  for (int i = 0; i < strlen(str); ++i){
+    if (str[i] == '1'){
+      binarynum = binarynum + IntPow(2, (strlen(str) - i - 1));
+    }
+  }
+  return binarynum;
+}
+
+int IntPow(int  base, int exp){
+  // Performs exponentiation on integers
+  // Only designed for positive integers
+  if (base < 0 || exp < 0){
+    fprintf(stderr, "IntPow only works with positive numbers.");
+    return -1;
+  }
+  int result = 1;
+  for (int i = 0; i < exp; ++i){
+    result *= base;
+  }
+  return result;
+}

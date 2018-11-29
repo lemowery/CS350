@@ -1,0 +1,14 @@
+// Implementation of our math function
+#include <stdio.h>
+#include "math_fm.h"
+int AddIntegers(const int a, const int b) {
+  return a + b;
+}
+
+void PrintHello(){
+  printf("Hello\n");
+}
+
+int IsEven(const int numtotest){
+  return !(numtotest % 2);
+}

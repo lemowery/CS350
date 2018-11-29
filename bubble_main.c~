@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include "bubble_sort.h"
+
+int main(){
+  //Test IsSorted()
+  int array[] = {2, 3, 5, 4, 1};
+  if(IsSorted(array, 5 == FALSE)){
+    printf("ERROR: Error in IsSorted correctness.\n");
+  }
+  return 0;
+}

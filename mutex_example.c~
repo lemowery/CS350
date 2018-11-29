@@ -1,0 +1,21 @@
+#include <pthread.h>
+
+int main(){
+  // Mutex stands for mutual exclusion
+  // Assume you have a shared resource
+  // A mutex instance guards a resource to control the usage of such resource
+  pthread_t workers[4];
+  pthread_attr_t attributes;
+  // Create and initialize attributes
+  if (pthread_attr_init(&attributes)){
+    printf("ERROR: Unable to initialize attributes.\n");
+    return 1;
+  }
+  // Create threads that can inform the parent thread that it has finished
+  pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_JOINABLE);
+  // Array of numbers
+  int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  float average = 0.0f;
+  
+  return 0;
+}

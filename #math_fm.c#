@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include "math_fm.h"
+#include <stdlib.h> //for rand()
+#include <time.h> //for time()
+//one header file, source file for implementations,
+//and source file for main program
+
+float AddFloats(const float a, const float b){
+  const float result = a + b;
+  return result;
+}
+
+int main(){
+  printf("Adding Integers %d\n", AddIntegers(2, 0));
+  PrintHello();
+  if (IsEven(2)){
+    printf("It is even!\n");
+  }
+  //seeding the randomizer
+  srand(time(NULL));//very important
+  for(int i = 0; i <= 10; ++i){
+    printf("%d\n", rand() % 10);
+  }
+
+  {//defining a scope
+    int result = 0;
+    printf("%d\n", result);
+  }
+  float res = AddFLoats(result, result); 
+  return 0;
+}

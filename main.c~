@@ -1,0 +1,37 @@
+/*
+Levi Mowery
+lemowery@mix.wvu.edu
+800096308
+*/
+
+#include <stdio.h>
+#include "assignment_2.h"
+
+int main(){
+
+  //Problem 1
+  char* string1 = "kayak";
+  char* string2 = "Levi";
+  if (IsPalindrome(string1)){
+    printf("%s is a palindrome.\n", string1);
+    } else {
+    printf("%s is not a palindrome.\n", string1);
+    }
+    if (IsPalindrome(string2)){
+      printf("%s is a palindrome.\n", string2);
+    } else {
+      printf("%s is not a palindrome.\n", string2);
+    }
+    printf("\n");
+    
+    //Problem 2
+    char* string3 = "Dog";
+    char* string4 = "house";
+    char string5[512] = {};
+    char string6[512] = {};
+    ConcatenateStrings(string1, string2, string5);
+    ConcatenateStrings(string3, string4, string6);
+    printf("%s concatenated with %s is %s\n", string1, string2, string5);
+    printf("%s concatenated with %s is %s\n", string3, string4, string6);      
+  return 0;
+}

@@ -1,0 +1,17 @@
+/*
+Levi Mowery
+lemowery@mix.wvu.edu
+800096308
+ */
+#ifndef BONUS_POINTS_H_
+#define BONUS_POINTS_H_
+
+void MergeSort(int* first, int* last);
+
+void Merge(int* first, int* middle, int* last);
+
+int BinaryStringToDecimal(char* str);
+
+int IntPow(int  base, int exp);
+
+#endif

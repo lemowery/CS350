@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+//Declaration of function
+int AddIntegers(const int a, const int b); //protect input information
+
+void PrintHello(){
+  printf("Hello!\n");
+}
+int main(){
+  printf("Sum %d\n", AddIntegers(0,1));
+  PrintHello();
+  return 0;
+}
+
+//Definition of function
+int AddIntegers(int a, int b){
+  return a + b;
+}

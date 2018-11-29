@@ -1,0 +1,20 @@
+#ifndef STACK_H_
+#define STACK_H_
+
+typedef struct{
+  const void* data;
+  Node* previous;
+} Node;
+
+typedef struct Stack{
+  // Generic pointer to the top
+  Node* top;
+} Stack;
+
+Stack* CreateStack();
+void DestroyStack(Stack** stack_ptr);
+void Push(const void* data_to_store, Stack* stack);
+const void* Pop(Stack* stack);
+
+
+#endif

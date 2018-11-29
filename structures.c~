@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+// Definition of new datatypre named 'UserInfo'
+// with two members using a structure
+struct UserInfo{
+  char* user_name;
+  char* password;
+  
+}; // Dont forget semicolon
+
+// typedef allows us to create aliases of datatypes
+// every time you see UserInfo it mesns 'struct UserInfo'
+typedef struct UserInfo UserInfo;
+
+int main(){
+  UserInfo user;
+  
+  return 0;
+}

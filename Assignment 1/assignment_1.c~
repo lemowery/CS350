@@ -1,0 +1,35 @@
+/*
+Levi Mowery
+lemowery@mix.wvu.edu
+800096308
+ */
+
+#include <stdio.h>
+#include "assignment_1.h"
+
+//Problem 1: Factorial Calculator
+int CalculateFactorial(int number){
+  int answer = 1;
+  if(number < 0){
+    return 0;
+  }
+  for(int i = number; i > 0; --i){
+    answer *= i;
+  }
+  return answer;
+}
+
+//Problem 2: Fibonacci Calculator
+int CalculateFibonacci(int number){
+  return 0;
+}
+
+//Problem 3: Array Reverser
+void ReverseArray(int size, int array[]){
+  return 0;
+}
+
+//Problem 4: Array Shuffler
+void ShuffleArray(int size, int array[]){
+  return 0;
+}

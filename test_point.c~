@@ -1,0 +1,7 @@
+#include <stdio.h>
+#include "point.h"
+
+int main(){
+  Point2d point = CreatePoint2d(5, 5);
+  return 0;
+}

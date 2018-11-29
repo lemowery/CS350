@@ -1,0 +1,5 @@
+#include "ben_helpers.h"
+
+void PrintHelp(){
+  printf("Help file\n");
+}

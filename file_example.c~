@@ -1,0 +1,21 @@
+#include <stdio.h> // printf() or puts()
+
+int main(int argc, char* argv[]){
+  if (argc != 2){
+    printf("Usage: %s <file to open>\n", argv[0]);
+    // Reporting a bad finish!
+    return 1;
+  }
+    char* input_file = argv[1];
+    // Reports the exit status to the OS
+    FILE* file_to_open = fopen(input_file, "r");
+    if (file_to_open == NULL){
+      printf("Unable to open file %s\n", input_file);
+      return 1;
+    }
+    // I have opened a file
+    // TODO: Read the file
+    // Open the file
+    fclose(file_to_open);
+  return 0;
+}
